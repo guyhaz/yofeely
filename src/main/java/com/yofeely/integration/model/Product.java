@@ -1,6 +1,6 @@
-package com.example.yofeely.model;
+package com.yofeely.integration.model;
 
-import com.example.yofeely.dtos.LindoProductsResponse;
+import com.yofeely.integration.dtos.Lindo.LindoProductsResponse;
 import lombok.Builder;
 import lombok.Value;
 
@@ -16,4 +16,6 @@ public class Product {
                 .quantity(lindoProductsResponse.getProduct_quantity())
                 .build();
     }
+
+
 }

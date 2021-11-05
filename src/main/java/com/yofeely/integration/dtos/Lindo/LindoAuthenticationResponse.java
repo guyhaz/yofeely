@@ -1,4 +1,4 @@
-package com.example.yofeely.dtos;
+package com.yofeely.integration.dtos.Lindo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;

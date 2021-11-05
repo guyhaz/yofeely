@@ -1,4 +1,4 @@
-package com.example.yofeely;
+package com.yofeely.integration;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,10 +1,10 @@
-package com.example.yofeely.service;
+package com.yofeely.integration.service;
 
-import com.example.yofeely.dtos.LindoAuthenticationRequest;
-import com.example.yofeely.dtos.LindoAuthenticationResponse;
-import com.example.yofeely.dtos.LindoProductsRequest;
-import com.example.yofeely.dtos.LindoProductsResponse;
-import com.example.yofeely.model.Product;
+import com.yofeely.integration.dtos.Lindo.LindoAuthenticationRequest;
+import com.yofeely.integration.dtos.Lindo.LindoAuthenticationResponse;
+import com.yofeely.integration.dtos.Lindo.LindoProductsRequest;
+import com.yofeely.integration.dtos.Lindo.LindoProductsResponse;
+import com.yofeely.integration.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -16,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -37,12 +36,6 @@ public class LindoIntegrationService {
 
     @Value("${lindo.clientSecret}")
     private String clientSecret;
-
-    public String updateLindoStock() {
-        String token = authenticate();
-
-        return token;
-    }
 
     public List<Product> filterProducts(LindoProductsRequest filter) {
         return sendProductsRequest(filter).stream()

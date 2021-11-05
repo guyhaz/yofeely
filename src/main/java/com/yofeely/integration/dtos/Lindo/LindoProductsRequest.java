@@ -1,4 +1,4 @@
-package com.example.yofeely.dtos;
+package com.yofeely.integration.dtos.Lindo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
