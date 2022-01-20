@@ -13,7 +13,7 @@ public class Product {
     public static Product from(LindoProductsResponse lindoProductsResponse) {
         return Product.builder()
                 .sku(lindoProductsResponse.getBarcode())
-                .quantity(lindoProductsResponse.getProduct_quantity())
+                .quantity(lindoProductsResponse.getProduct_stock())
                 .build();
     }
 

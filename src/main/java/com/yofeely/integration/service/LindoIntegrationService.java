@@ -43,7 +43,7 @@ public class LindoIntegrationService {
                 .collect(Collectors.toList());
     }
 
-    public Product getProductQuantityBySku(Integer sku) {
+    public Product getProductQuantityBySku(String sku) {
         LindoProductsRequest request = LindoProductsRequest.builder()
                 .sku(sku)
                 .build();

@@ -14,7 +14,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 public class LindoProductsRequest {
 
     @JsonProperty("barcode")
-    Integer sku;
+    String sku;
 
     @JsonProperty("department_id")
     Integer departmentId;

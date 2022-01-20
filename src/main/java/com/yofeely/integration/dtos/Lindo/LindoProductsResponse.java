@@ -14,7 +14,7 @@ public class LindoProductsResponse {
 
     String barcode;
 
-    String product_quantity;
+    String product_stock;
 
     String english_product_name;
 }

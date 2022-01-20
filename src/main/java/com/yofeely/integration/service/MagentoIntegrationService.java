@@ -32,8 +32,6 @@ public class MagentoIntegrationService {
     public MagentoProductResponse getProductBySku(String sku) {
         String url = baseUrl + productsUrl + sku;
 
-        getAuthorizationToken();
-
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + accessToken);
         HttpEntity<Object> entity = new HttpEntity<>(headers);
@@ -43,22 +41,28 @@ public class MagentoIntegrationService {
     }
 
     public String updateStockQtyBySku(String sku, int qty) {
-        MagentoProductResponse product = getProductBySku(sku);
-        String url = baseUrl + productsUrl + sku + "/stockItems/" + product.getId();
-        MagentoUpdateQtyRequest request = MagentoUpdateQtyRequest.builder()
-                .stockItem(StockItem.builder()
-                        .qty(qty)
-                        .build())
-                .build();
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + accessToken);
-        HttpEntity<MagentoUpdateQtyRequest> entity = new HttpEntity<>(request, headers);
-        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.PUT, entity, String.class);
+        try {
+            if (accessToken.equals("")) accessToken = getAuthorizationToken();
+            MagentoProductResponse product = getProductBySku(sku);
+            String url = baseUrl + productsUrl + sku + "/stockItems/" + product.getId();
+            MagentoUpdateQtyRequest request = MagentoUpdateQtyRequest.builder()
+                    .stockItem(StockItem.builder()
+                            .qty(qty)
+                            .build())
+                    .build();
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Authorization", "Bearer " + accessToken);
+            HttpEntity<MagentoUpdateQtyRequest> entity = new HttpEntity<>(request, headers);
+            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.PUT, entity, String.class);
 
-        return response.getBody();
+            return response.getBody();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "failed to update";
+        }
     }
 
-    private void getAuthorizationToken() {
+    private String  getAuthorizationToken() {
         String url = baseUrl + authenticationUrl;
         MagentoAuthenticationRequest authentication = MagentoAuthenticationRequest.builder()
                 .username(username)
@@ -67,6 +71,6 @@ public class MagentoIntegrationService {
         HttpEntity<MagentoAuthenticationRequest> entity = new HttpEntity<>(authentication);
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
 
-        accessToken =  response.getBody().substring(1, response.getBody().length()-1);
+        return response.getBody().substring(1, response.getBody().length()-1);
     }
 }

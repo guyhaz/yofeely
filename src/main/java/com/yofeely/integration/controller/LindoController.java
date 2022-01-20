@@ -19,7 +19,7 @@ public class LindoController {
     LindoIntegrationService lindoIntegrationService;
 
     @GetMapping("/getProductQuantityBySku/{sku}")
-    public ResponseEntity<Object> getQuantityBySku(@PathVariable int sku) {
+    public ResponseEntity<Object> getQuantityBySku(@PathVariable String sku) {
         try {
             return ResponseEntity.ok(lindoIntegrationService.getProductQuantityBySku(sku));
         } catch (Exception e) {
